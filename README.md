@@ -161,3 +161,24 @@ obj.insert("year", "1991");
 let box = Box::new(5);
 // b指向定义在堆上的Box(5)
 ```
+
+### Result<T,E>
+
+unwrap_or_else 是定义在 Result<T,E> 上的常用方法，如果 Result 是 Ok，那该方法就类似 unwrap：返回 Ok 内部的值；如果是 Err，就调用闭包中的自定义代码对错误进行进一步处理
+
+```rs
+fn build(args: &[String]) -> Result<Self, &str> {
+    if args.len() < 3 {
+        return Err("not enough arguments");
+    }
+    let query = args[1].clone();
+    let file_path = args[2].clone();
+
+    Ok(Config { query, file_path })
+}
+
+let config = Config::build(&args).unwrap_or_else(|err| {
+    println!("程序异常：{}", err);
+    process::exit(1);
+});
+```
