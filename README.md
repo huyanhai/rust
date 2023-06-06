@@ -182,3 +182,56 @@ let config = Config::build(&args).unwrap_or_else(|err| {
     process::exit(1);
 });
 ```
+
+### 闭包
+
+```rs
+|x: u8| {
+    let y = 10;
+    x + y
+}
+
+FnOnce // 该闭包只运行一次
+
+fn fn_once<F>(func: F)
+where
+    F: FnOnce(usize) -> bool,
+{
+    println!("{}", func(3));
+    println!("{}", func(4));
+}
+
+fn main() {
+    let x = vec![1, 2, 3];
+    fn_once(|z|{z == x.len()})
+}
+
+FnMut // 可变
+```
+
+### 迭代器
+
+```rs
+struct Counter {
+    count: i32,
+}
+
+impl Counter {
+    fn new() -> Self {
+        Counter { count: 0 }
+    }
+}
+
+impl Iterator for Counter {
+    type Item = i32;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.count < 10 {
+            self.count += 1;
+            Some(self.count)
+        } else {
+            None
+        }
+    }
+}
+```
