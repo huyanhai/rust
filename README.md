@@ -1,3 +1,29 @@
+### 模块
+```rs
+// 定义并导出模块
+// ./test.rs
+pub fn test() {}
+
+
+// ./main.rs
+
+// 导入模块
+mod test;
+
+// 使用模块的方法
+test::test();
+
+
+// 目录下的模块
+//./test/mod.rs
+// 导入并导出模块
+pub mod test;
+
+
+//./test/test.rs
+pub fn test() {}
+```
+
 ### 所有权转移
 
 ```rs
