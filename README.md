@@ -179,6 +179,34 @@ obj.insert("name", "数学");
 obj.insert("year", "1991");
 // 同名的会被后面的覆盖
 // {"year": "1991", "name": "数学"}
+
+let user_list: Vec<(&str, u16)> = vec![("name1", 12)];
+
+let mut user_map: HashMap<&str, u16> = user_list.into_iter().collect();
+
+println!("user_list: {:?}", user_map);
+// user_list: {"name1": 12}
+
+println!("user_list: {:?}", user_map.get("name1"));
+// user_list: Some(12)
+
+println!("user_list: {:?}", user_map["name1"]);
+// user_list: 12
+
+// 如果存在则返回name2对应的值，否则插入name2->20,并返回插入后的值
+let i = user_map.entry("name2").or_insert(20);
+```
+
+### 静态数组和动态数组
+```rs
+// 生成100个1的数组
+// 静态数组，长度固定
+let list: [i32; 100] = [1; 100];
+
+// 动态数组
+let mut list1: Vec<i32> = vec![1, 2, 3];
+
+list1.push(4);
 ```
 
 ### Box<T>
@@ -260,4 +288,26 @@ impl Iterator for Counter {
         }
     }
 }
+```
+
+### 静态字符串和动态字符串
+```rs
+let str = "hello world";
+
+let string = String::from("hello world");
+
+// 将静态字符串转为动态字符串
+let mut string1 = str.to_string();
+
+// 将动态字符串转为静态字符串
+let str1 = string.as_str();
+
+string1.push_str("info");
+
+let string2 = String::from("hello,世界");
+
+string1.push('!');
+
+// 汉字占3个字节
+println!("{}", string1);
 ```
