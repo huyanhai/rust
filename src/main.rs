@@ -1,32 +1,16 @@
-use std::{fs, io};
+mod demos;
+mod ray;
+mod utils;
+mod vec3;
 
-static FILE_NAME: &'static str = "dist/00.ppm";
+mod test_var;
 
-fn main() -> io::Result<()> {
-    let image_width = 256;
-    let image_height = 256;
+fn main() {
+    // demos::demo01::run();
 
-    let mut content = String::from(format!("P3\n{image_width} {image_height} \n255\n"));
+    // test_var::test_var();
+    // test_var::test_arr();
 
-    for j in (0..image_height).rev() {
-        for i in 0..image_width {
-            let i = i as f64;
-            let j = j as f64;
-            let w = image_width as f64;
-            let h = image_height as f64;
-
-            let r = (i / w) as f64;
-            let g = (j / h) as f64;
-            let b = 0.25;
-
-            let ir = (255.999 * r) as u32;
-            let ig = (255.999 * g) as u32;
-            let ib = (255.999 * b) as u32;
-            let str = format!("{ir} {ig} {ib}\n");
-            content.push_str(&str);
-        }
-    }
-
-    fs::write(FILE_NAME, content.as_bytes())?;
-    Ok(())
+    // test_var::test_impl();
+    test_var::test_read_file();
 }

@@ -207,6 +207,31 @@ let list: [i32; 100] = [1; 100];
 let mut list1: Vec<i32> = vec![1, 2, 3];
 
 list1.push(4);
+
+// 在遍历的时候需要修改元素的时候使用
+list.into_iter
+let vec = vec![1, 2, 3];
+
+// 使用 iter 遍历
+for &value in vec.iter() {
+    println!("{}", value); // 打印出 1, 2, 3
+}
+
+// vec 仍然可以使用
+println!("{:?}", vec); // 打印出 [1, 2, 3]
+}
+
+// 在遍历时不需要修改元素的时候使用
+list.iter
+let vec = vec![1, 2, 3];
+
+// 使用 into_iter 遍历
+for value in vec.into_iter() {
+    println!("{}", value); // 打印出 1, 2, 3
+}
+
+// vec 现在已经不可用
+// println!("{:?}", vec); // 错误：vec 已被消费
 ```
 
 ### Box<T>
@@ -311,3 +336,8 @@ string1.push('!');
 // 汉字占3个字节
 println!("{}", string1);
 ```
+
+### 项目结构
+- module：用于组织和封装代码的单元。它可以包含函数、结构体、枚举、常量、Trait等，也可以包含其他模块。通过使用mod关键字可以在 Rust 中创建模块，并且模块可以嵌套形成模块树。
+- crate：是 Rust 中的编译单元，可以是库 crate 或二进制 crate（它们的区别参见FAQ）。一个 crate 可以包含一个或多个模块。
+- package：是一个包含一个或多个相关 crate 的项目工程。它由一个 Cargo.toml文件定义，该文件包含有关项目的元信息、依赖关系以及其他配置选项。一个 package 可能包含一个主 crate（通常是可执行文件）和零个或多个库 crate（通常是依赖 crate）。
